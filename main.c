@@ -6,90 +6,55 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:02:09 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/08 12:49:31 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/09 15:15:23 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void *philo_pair(void *data)
+void	*check_if_dead(void *infos)
 {
-	int		t;
-	t_info *info = (t_info *)data;
+	int		i;
+	t_info	*list_info;
 
-	t = 1;
-	while (info->global_info->stop == 0)
+	list_info = (t_info *)infos;
+	i = 0;
+	while (1)
 	{
-		if (pthread_mutex_lock(info->fork_left) == 0)
+		while (i < list_info[0].global_info->total_philo)
 		{
-			printf("%lu %zu has taken a fork\n", get_timestamp(info->global_info->start_time), info->number);
-			while (info->global_info->stop == 0)
+			if (get_timestamp(0) - list_info[i].last_meal >= list_info->global_info->time_die)
 			{
-				if (pthread_mutex_lock(info->fork_right) == 0)
-				{
-					printf("%lu %zu has taken a fork\n", get_timestamp(info->global_info->start_time), info->number);
-					printf("%lu %zu is eating\n", get_timestamp(info->global_info->start_time), info->number);
-					my_usleep(info->global_info->time_eat * 1000);
-					printf("%lu %zu is sleeping\n", get_timestamp(info->global_info->start_time), info->number);
-					pthread_mutex_unlock(info->fork_left);
-					pthread_mutex_unlock(info->fork_right);
-					my_usleep(info->global_info->time_sleep * 1000);
-					print_thinking(info->global_info, *info, 1);
-					break;
-				}
+				printf("\n\nC DEAD !! ->%d || timing -> %zu\n\n", i, get_timestamp(0) - list_info[i].last_meal);
+				exit(-1);
 			}
+			i++;
 		}
+		i = 0;
 	}
-	return (NULL);
 }
 
-void *philo_impair(void *data)
-{
-	int		t;
-	int		d;
-	t_info *info = (t_info *)data;
-
-	t = 1;
-	d = 0;
-	print_thinking(info->global_info, *info, 0);
-	while (info->global_info->stop == 0)
-	{
-		if (pthread_mutex_lock(info->fork_right) == 0)
-		{
-			printf("%lu %zu has taken a fork\n", get_timestamp(info->global_info->start_time), info->number);
-			while (info->global_info->stop == 0)
-			{
-				if (pthread_mutex_lock(info->fork_left) == 0)
-				{
-					printf("%lu %zu has taken a fork\n", get_timestamp(info->global_info->start_time), info->number);
-					printf("%lu %zu is eating\n", get_timestamp(info->global_info->start_time), info->number);
-					my_usleep(info->global_info->time_eat * 1000);
-					printf("%lu %zu is sleeping\n", get_timestamp(info->global_info->start_time), info->number);
-					pthread_mutex_unlock(info->fork_left);
-					pthread_mutex_unlock(info->fork_right);
-					my_usleep(info->global_info->time_sleep * 1000);\
-					print_thinking(info->global_info, *info, 1);
-					break;
-				}
-			}
-		}
-	}
-	return (NULL);
-}
-
-int main()
+int main(int ac, char **av)
 {
 	int				i;
-	int				number_of_philo = 8;
+	int				number_of_philo = 100;
 	pthread_mutex_t	*locks;
-	pthread_t		*list_threads = malloc(number_of_philo * sizeof(pthread_t));
-	t_info			*list_infos = malloc(number_of_philo * sizeof(t_info));
+	pthread_t		*list_threads;
+	t_info			*list_infos;
 	t_global_info	global_info;
 	
+	if (check_args_validity(ac, av) == 0 || !(ac == 5 || ac == 4))
+		exit(-1);
+	list_threads = malloc((number_of_philo + 1) * sizeof(pthread_t));
+	list_infos = malloc(number_of_philo * sizeof(t_info));
 	i = 0;
 	create_locks(&locks, number_of_philo);
-	create_global_info(&global_info, 400, 200, 60);
+	create_global_info(&global_info, ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]));
 	global_info.total_philo = number_of_philo;
+	if (ac == 4)
+		global_info.n_eat = -1;
+	else
+		global_info.n_eat = ft_atoi(av[4]);
 	while (i < number_of_philo)
 	{
 		list_infos[i].global_info = &global_info;
@@ -100,8 +65,9 @@ int main()
 			pthread_create(&list_threads[i], NULL, philo_impair, &list_infos[i]);
 		i++;
 	}
+	pthread_create(&list_threads[i], NULL, check_if_dead, list_infos);
 	i = 0;
-	while (i < number_of_philo)
+	while (i < number_of_philo + 1)
 	{
 		pthread_join(list_threads[i], NULL);
 		i++;

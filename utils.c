@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:44:45 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/08 12:50:55 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/09 15:13:14 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	create_locks(pthread_mutex_t **lock_list, size_t number_of_philo)
 void	create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp)
 {
 	il[p].number = p;
+	il[p].last_meal = il[p].global_info->start_time;
 	if (p != 0 && p != mp)
 	{
 		il[p].fork_left = &ll[p - 1];
@@ -60,12 +61,12 @@ int	print_thinking(t_global_info *global_info, t_info info, int e)
 {
 	if (e == 1)
 	{
-		if ((global_info->total_philo % 2 != 0) && (global_info->time_eat != global_info->time_sleep))
+		if ((global_info->total_philo % 2 != 0) && (global_info->time_eat > global_info->time_sleep))
 		{
 			printf("%lu %zu is thinking\n", get_timestamp(global_info->start_time), info.number);
-			my_usleep(((global_info->time_eat * 2) - global_info->time_sleep) * 1000);
+			my_usleep(((global_info->time_eat * 1.2) - global_info->time_sleep) * 1000);
 		}
-		else if (global_info->time_sleep != global_info->time_eat)
+		else if (global_info->time_sleep <= global_info->time_eat)
 			printf("%lu %zu is thinking\n", get_timestamp(global_info->start_time), info.number);
 	}
 	else
@@ -75,10 +76,18 @@ int	print_thinking(t_global_info *global_info, t_info info, int e)
 			printf("%lu %zu is thinking\n", get_timestamp(global_info->start_time), info.number);
 			my_usleep((global_info->time_eat - global_info->time_sleep) * 1000);
 		}
-		if ((global_info->total_philo % 2 != 0) && (global_info->time_eat != global_info->time_sleep))
+		if ((global_info->total_philo % 2 == 0) && (global_info->time_eat <= global_info->time_sleep))
 		{
 			printf("%lu %zu is thinking\n", get_timestamp(global_info->start_time), info.number);
-			my_usleep(((global_info->time_eat * 2) - global_info->time_sleep) * 1000);
+			my_usleep(global_info->time_eat * 1000);
+		}
+		if (global_info->total_philo % 2 != 0)
+		{
+			printf("%lu %zu is thinking\n", get_timestamp(global_info->start_time), info.number);
+			if (global_info->time_eat > global_info->time_sleep)
+				my_usleep(((global_info->time_eat * 1.2) - global_info->time_sleep) * 1000);
+			else
+				my_usleep((global_info->time_eat * 1.2) * 1000);
 		}
 	}
 	return (1);
@@ -89,6 +98,7 @@ int	my_usleep(size_t usec)
 	size_t	start;
 
 	start = get_timestamp(0);
+	usleep((usec * 90) / 100);
 	while ((get_timestamp(0) - start) < (usec / 1000))
 		usleep(1);
 	return (1);
