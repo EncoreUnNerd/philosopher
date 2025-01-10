@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:02:09 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/09 15:15:23 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/10 16:14:51 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 void	*check_if_dead(void *infos)
 {
-	int		i;
+	size_t	i;
+	size_t	actual_time;
 	t_info	*list_info;
 
 	list_info = (t_info *)infos;
+	actual_time = 0;
 	i = 0;
 	while (1)
 	{
 		while (i < list_info[0].global_info->total_philo)
 		{
-			if (get_timestamp(0) - list_info[i].last_meal >= list_info->global_info->time_die)
+			if ((actual_time >= list_info->last_meal) && (actual_time - list_info[i].last_meal > list_info->global_info->time_die))
 			{
-				printf("\n\nC DEAD !! ->%d || timing -> %zu\n\n", i, get_timestamp(0) - list_info[i].last_meal);
+				printf("\n\nC DEAD !! ->%zu || timing -> %zu || die -> %zu\n\n", i, actual_time - list_info[i].last_meal, list_info[i].global_info->time_die);
 				exit(-1);
 			}
 			i++;
@@ -37,21 +39,22 @@ void	*check_if_dead(void *infos)
 int main(int ac, char **av)
 {
 	int				i;
-	int				number_of_philo = 100;
+	int				number_of_philo;
 	pthread_mutex_t	*locks;
 	pthread_t		*list_threads;
 	t_info			*list_infos;
 	t_global_info	global_info;
 	
-	if (check_args_validity(ac, av) == 0 || !(ac == 5 || ac == 4))
+	if (check_args_validity(ac, av) == 0 || !(ac == 5 || ac == 6))
 		exit(-1);
+	number_of_philo = ft_atoi(av[1]);
 	list_threads = malloc((number_of_philo + 1) * sizeof(pthread_t));
 	list_infos = malloc(number_of_philo * sizeof(t_info));
 	i = 0;
 	create_locks(&locks, number_of_philo);
-	create_global_info(&global_info, ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]));
+	create_global_info(&global_info, ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]));
 	global_info.total_philo = number_of_philo;
-	if (ac == 4)
+	if (ac == 5)
 		global_info.n_eat = -1;
 	else
 		global_info.n_eat = ft_atoi(av[4]);

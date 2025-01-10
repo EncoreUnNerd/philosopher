@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:44:45 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/09 15:13:14 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/10 16:15:29 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	create_locks(pthread_mutex_t **lock_list, size_t number_of_philo)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	*lock_list = malloc(sizeof(pthread_mutex_t) * number_of_philo);

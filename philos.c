@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:07:56 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/09 14:57:11 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/10 15:48:48 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ void	*philo_pair(void *data)
 				if (pthread_mutex_lock(info->fork_right) == 0)
 				{
 					printf("%lu %zu has taken a fork\n", get_timestamp(info->global_info->start_time), info->number);
-					info->last_meal = get_timestamp(0);
 					printf("%lu %zu is eating\n", get_timestamp(info->global_info->start_time), info->number);
 					my_usleep(info->global_info->time_eat * 1000);
-					printf("%lu %zu is sleeping\n", get_timestamp(info->global_info->start_time), info->number);
 					info->last_meal = get_timestamp(0);
+					printf("%lu %zu is sleeping\n", get_timestamp(info->global_info->start_time), info->number);
 					t++;
 					pthread_mutex_unlock(info->fork_left);
 					pthread_mutex_unlock(info->fork_right);
@@ -63,11 +62,10 @@ void	*philo_impair(void *data)
 				if (pthread_mutex_lock(info->fork_left) == 0)
 				{
 					printf("%lu %zu has taken a fork\n", get_timestamp(info->global_info->start_time), info->number);
-					info->last_meal = get_timestamp(0);
 					printf("%lu %zu is eating\n", get_timestamp(info->global_info->start_time), info->number);
 					my_usleep(info->global_info->time_eat * 1000);
-					printf("%lu %zu is sleeping\n", get_timestamp(info->global_info->start_time), info->number);
 					info->last_meal = get_timestamp(0);
+					printf("%lu %zu is sleeping\n", get_timestamp(info->global_info->start_time), info->number);
 					t++;
 					pthread_mutex_unlock(info->fork_left);
 					pthread_mutex_unlock(info->fork_right);
