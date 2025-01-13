@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 12:54:43 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/13 15:54:33 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct info
 void	create_locks(pthread_mutex_t **lock_list, size_t number_of_philo);
 void	create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp);
 size_t	get_timestamp(size_t start_time);
-int		thinking(t_global_info *t_global_info, t_info info, int e);
+int		thinking(t_info *info, int e);
 int		my_usleep(size_t usec);
 int		create_global_info(t_global_info *g, size_t td, size_t te, size_t ts);
 int		ft_atoi(const char *str);

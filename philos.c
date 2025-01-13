@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:07:56 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 12:56:14 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/13 15:56:06 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@ void	*philo_pair(void *data)
 
 	while (is_stoped(info) == 0 && (info->i_eat < info->global_info->n_eat || info->global_info->n_eat == -1))
 	{
-		if (is_stoped(info) == 0 && pthread_mutex_lock(info->fork_left) == 0)
+		if (is_stoped(info) == 0)
 		{
+			usleep(100);
+			pthread_mutex_lock(info->fork_left);
 			print_fork(info);
 			while (is_stoped(info) == 0)
 			{
-				if (is_stoped(info) == 0 && pthread_mutex_lock(info->fork_right) == 0)
+				if (is_stoped(info) == 0)
 				{
+					usleep(100);
+					pthread_mutex_lock(info->fork_right);
 					print_fork(info);
 					eating(info);
 					sleeping(info);
-					thinking(info->global_info, *info, 1);
+					thinking(info, 1);
 					break;
 				}
 			}
@@ -41,7 +45,7 @@ void	*philo_impair(void *data)
 {
 	t_info *info = (t_info *)data;
 
-	thinking(info->global_info, *info, 0);
+	thinking(info, 0);
 	while (is_stoped(info) == 0 && (info->i_eat < info->global_info->n_eat || info->global_info->n_eat == -1))
 	{
 		if (is_stoped(info) == 0 && pthread_mutex_lock(info->fork_right) == 0)
@@ -54,7 +58,7 @@ void	*philo_impair(void *data)
 					print_fork(info);
 					eating(info);
 					sleeping(info);
-					thinking(info->global_info, *info, 1);
+					thinking(info, 1);
 					break;
 				}
 			}

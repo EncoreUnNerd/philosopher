@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:44:45 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 12:55:22 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/13 15:57:04 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,39 +59,39 @@ size_t	get_timestamp(size_t start_time)
 	return ((tv.tv_sec * 1000 + tv.tv_usec / 1000) - start_time);
 }
 
-int	thinking(t_global_info *global_info, t_info info, int e)
+int	thinking(t_info *info, int e)
 {
 	if (e == 1)
 	{
-		if ((global_info->total_philo % 2 != 0) && (global_info->time_eat > global_info->time_sleep))
+		if ((info->global_info->total_philo % 2 != 0) && (info->global_info->time_eat > info->global_info->time_sleep))
 		{
-			print_thinking(&info);
-			my_usleep(((global_info->time_eat * 1.2) - global_info->time_sleep) * 1000);
+			print_thinking(info);
+			my_usleep(((info->global_info->time_eat * 1.2) - info->global_info->time_sleep) * 1000);
 		}
-		else if (global_info->time_sleep <= global_info->time_eat && (global_info->total_philo % 2 != 0))
-			print_thinking(&info);
-		else if (global_info->time_sleep < global_info->time_eat)
-			print_thinking(&info);
+		else if (info->global_info->time_sleep <= info->global_info->time_eat && (info->global_info->total_philo % 2 != 0))
+			print_thinking(info);
+		else if (info->global_info->time_sleep < info->global_info->time_eat)
+			print_thinking(info);
 	}
 	else
 	{
-		if ((global_info->total_philo % 2 == 0) && (global_info->time_eat > global_info->time_sleep))
+		if ((info->global_info->total_philo % 2 == 0) && (info->global_info->time_eat > info->global_info->time_sleep))
 		{
-			print_thinking(&info);
-			my_usleep((global_info->time_eat - global_info->time_sleep) * 1000);
+			print_thinking(info);
+			my_usleep((info->global_info->time_eat - info->global_info->time_sleep) * 1000);
 		}
-		if ((global_info->total_philo % 2 == 0) && (global_info->time_eat <= global_info->time_sleep))
+		if ((info->global_info->total_philo % 2 == 0) && (info->global_info->time_eat <= info->global_info->time_sleep))
 		{
-			print_thinking(&info);
-			my_usleep(global_info->time_eat * 1000);
+			print_thinking(info);
+			my_usleep(info->global_info->time_eat * 1000);
 		}
-		if (global_info->total_philo % 2 != 0)
+		if (info->global_info->total_philo % 2 != 0)
 		{
-			print_thinking(&info);
-			if (global_info->time_eat > global_info->time_sleep)
-				my_usleep(((global_info->time_eat * 1.2) - global_info->time_sleep) * 1000);
+			print_thinking(info);
+			if (info->global_info->time_eat > info->global_info->time_sleep)
+				my_usleep(((info->global_info->time_eat * 1.2) - info->global_info->time_sleep) * 1000);
 			else
-				my_usleep((global_info->time_eat * 1.2) * 1000);
+				my_usleep((info->global_info->time_eat * 1.2) * 1000);
 		}
 	}
 	return (1);
