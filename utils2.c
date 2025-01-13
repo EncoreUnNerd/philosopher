@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:41:51 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/09 12:54:53 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/13 11:48:28 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,46 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return ((int)(signe * result));
+}
+
+int	is_stoped(t_info *info)
+{
+	int res;
+
+	pthread_mutex_lock(&info->global_info->read_s);
+	res = info->global_info->stop;
+	pthread_mutex_unlock(&info->global_info->read_s);
+	return (res);
+}
+
+void print_thinking(t_info *info)
+{
+	pthread_mutex_lock(&info->global_info->print);
+	if (is_stoped(info) == 0)
+		printf("%lu %zu is thinking\n", get_timestamp(info->global_info->start_time), info->number);
+	pthread_mutex_unlock(&info->global_info->print);
+}
+
+void print_eating(t_info *info)
+{
+	pthread_mutex_lock(&info->global_info->print);
+	if (is_stoped(info) == 0)
+		printf("%lu %zu is eating\n", get_timestamp(info->global_info->start_time), info->number);
+	pthread_mutex_unlock(&info->global_info->print);
+}
+
+void print_sleeping(t_info *info)
+{
+	pthread_mutex_lock(&info->global_info->print);
+	if (is_stoped(info) == 0)
+		printf("%lu %zu is sleeping\n", get_timestamp(info->global_info->start_time), info->number);
+	pthread_mutex_unlock(&info->global_info->print);
+}
+
+void print_fork(t_info *info)
+{
+	pthread_mutex_lock(&info->global_info->print);
+	if (is_stoped(info) == 0)
+		printf("%lu %zu has taken a fork\n", get_timestamp(info->global_info->start_time), info->number);
+	pthread_mutex_unlock(&info->global_info->print);
 }
