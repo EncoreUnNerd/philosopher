@@ -1,16 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philos.c                                           :+:      :+:    :+:   */
+/*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 17:07:56 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 15:56:06 by mhenin           ###   ########.fr       */
+/*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
+/*   Updated: 2025/01/13 16:56:05 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+void	*monitoring(void *infos)
+{
+	size_t	i;
+	int		run;
+	t_info	*list_info;
+
+	list_info = (t_info *)infos;
+	i = 0;
+	run = 1;
+	while (run)
+	{
+		while (i < list_info[0].global_info->total_philo)
+		{
+			run = check_and_update(&list_info, get_timestamp(0), i);
+			if (run == 0)
+				break;
+			i++;
+		}
+		i = 0;
+	}
+	return (0);
+}
 
 void	*philo_pair(void *data)
 {
@@ -65,28 +88,4 @@ void	*philo_impair(void *data)
 		}
 	}
 	return (NULL);
-}
-
-void	eating(t_info *info)
-{
-	if (is_stoped(info) == 0)
-	{
-		print_eating(info);
-		my_usleep(info->global_info->time_eat * 1000);
-		pthread_mutex_lock(&info->read_l);
-		info->last_meal = get_timestamp(0);
-		pthread_mutex_unlock(&info->read_l);
-	}
-	pthread_mutex_unlock(info->fork_left);
-	pthread_mutex_unlock(info->fork_right);
-}
-
-void	sleeping(t_info *info)
-{
-	if (is_stoped(info) == 0)
-	{
-		print_sleeping(info);
-		my_usleep(info->global_info->time_sleep * 1000);
-		info->i_eat++;
-	}
 }
