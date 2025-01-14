@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 17:20:34 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:49:02 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,22 @@ int		my_usleep(size_t usec);
 int		create_global_info(t_global_info *g, size_t td, size_t te, size_t ts);
 int		ft_atoi(const char *str);
 int		check_args_validity(int number, char **value);
-void 	*philo_pair(void *data);
-void 	*philo_impair(void *data);
+void	*philo(void *data);
 void	eating(t_info *info);
 void	sleeping(t_info *info);
 int		is_stoped(t_info *info);
-void 	print_fork(t_info *info);
-void 	print_sleeping(t_info *info);
-void 	print_eating(t_info *info);
-void 	print_thinking(t_info *info);
-void 	print_dead(t_info *info);
+void	print_fork(t_info *info);
+void	print_sleeping(t_info *info);
+void	print_eating(t_info *info);
+void	print_thinking(t_info *info);
+void	print_dead(t_info *info);
 void	*monitoring(void *infos);
 size_t	get_last_meal(t_info *info);
 void	say_stop(t_info	*info);
 int		check_and_update(t_info **list_info, size_t actual_time, int i);
-void	free_everything(pthread_t **list_threads, t_info **list_info, pthread_mutex_t **locks);
+void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
+int		sleepneat(t_info *info);
+void	monitor_n_wait(char **av, pthread_t **l_t, t_info **l_i, int i);
+int		initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i);
 
 #endif

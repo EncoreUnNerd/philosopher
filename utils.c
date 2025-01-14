@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:44:45 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 16:21:35 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:46:41 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	my_usleep(size_t usec)
 
 int	is_stoped(t_info *info)
 {
-	int res;
+	int	res;
 
 	pthread_mutex_lock(&info->global_info->read_s);
 	res = info->global_info->stop;

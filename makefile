@@ -1,6 +1,6 @@
 NAME = philosopher
 
-SRCS = main.c actions.c check.c initialize.c prints.c threads.c utils.c monitoring_utils.c
+SRCS = main.c actions.c check.c initialize.c prints.c threads.c utils.c monitoring_utils.c main_utils.c
 # SRCS_UTILITIES = stack_utilities/advanced_stack_operations.c \
 # 				stack_utilities/stack_initialization.c \
 # 				stack_utilities/stack_management.c \
