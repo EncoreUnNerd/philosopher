@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:32:18 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 18:43:04 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 14:13:15 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_and_update(t_info **list_info, size_t actual_time, int i)
 
 	last_eat = get_last_meal(&(*list_info)[i]);
 	if ((actual_time - last_eat > (*list_info)[0].global_info->time_die + 5) \
-		&& (actual_time >= last_eat))
+		&& (actual_time >= last_eat) && (list_info[i]->i_eat < list_info[0]->global_info->n_eat))
 	{
 		say_stop(&(*list_info)[i]);
 		print_dead(&(*list_info)[i]);
