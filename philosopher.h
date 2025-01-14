@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 18:49:02 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 14:22:57 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
 int		sleepneat(t_info *info);
 void	monitor_n_wait(char **av, pthread_t **l_t, t_info **l_i, int i);
 int		initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i);
+int		check_end_eat(t_info **list_info);
 
 #endif

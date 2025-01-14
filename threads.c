@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 18:46:17 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 14:24:11 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	*monitoring(void *infos)
 			run = check_and_update(&list_info, get_timestamp(0), i);
 			if (run == 0)
 				break ;
+			if (check_end_eat(&list_info) == 1)
+			{
+				run = 0;
+				break ;
+			}
 			i++;
 		}
 		i = 0;

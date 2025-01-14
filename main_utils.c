@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:23:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 19:05:26 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 14:48:27 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ int	initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i)
 
 void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks)
 {
+	size_t	i;
+	size_t	number_philo;
+
+	i = 0;
+	number_philo = l_i[0]->global_info->total_philo;
+	pthread_mutex_destroy(&(*l_i)[0].global_info->read_s);
+	pthread_mutex_destroy(&(*l_i)[0].global_info->print);
+	while (i < number_philo)
+	{
+		pthread_mutex_destroy(&(*l_i)[i].read_l);
+		i++;
+	}
+	i = 0;
+	while (i < number_philo)
+	{
+		pthread_mutex_destroy(&(*locks)[i]);
+		i++;
+	}
 	free(*l_t);
 	free(*l_i);
 	free(*locks);
