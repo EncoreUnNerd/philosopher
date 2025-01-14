@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 14:22:57 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 19:24:15 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,16 @@ typedef struct info
 	pthread_mutex_t	*fork_right;
 }	t_info;
 
-void	create_locks(pthread_mutex_t **lock_list, size_t number_of_philo);
-void	create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp);
+typedef struct goofy_bin
+{
+	pthread_mutex_t	*locks;
+	pthread_t		*list_threads;
+	t_info			*list_infos;
+	t_global_info	global_info;
+}	t_bin;
+
+int		create_locks(pthread_mutex_t **lock_list, size_t number_of_philo);
+int		create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp);
 size_t	get_timestamp(size_t start_time);
 int		thinking(t_info *info, int e);
 int		my_usleep(size_t usec);
@@ -67,8 +75,16 @@ void	say_stop(t_info	*info);
 int		check_and_update(t_info **list_info, size_t actual_time, int i);
 void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
 int		sleepneat(t_info *info);
-void	monitor_n_wait(char **av, pthread_t **l_t, t_info **l_i, int i);
+void	monitor_n_wait(char **av, t_bin *bin, int i);
 int		initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i);
 int		check_end_eat(t_info **list_info);
+void	thinking2(t_info *info);
+void	solo(t_info *info);
+void	mall_init(t_bin *bin, char **av);
+void	destroy_locks(pthread_mutex_t **locks, int max);
+void	free_all(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
+void	destroy_infos(t_info **l_i, int max);
+void	free_opti(int i, t_bin *bin, char **av);
+int		optization(int i, char **av, t_bin *bin);
 
 #endif

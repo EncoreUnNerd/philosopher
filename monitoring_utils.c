@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:32:18 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 14:49:58 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 19:19:20 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ int	check_and_update(t_info **list_info, size_t actual_time, int i)
 	size_t	last_eat;
 
 	last_eat = get_last_meal(&(*list_info)[i]);
-	if ((actual_time - last_eat > (*list_info)[0].global_info->time_die + 5) \
+	if ((actual_time - last_eat > (*list_info)[0].global_info->time_die) \
 		&& (actual_time >= last_eat) && \
-		((*list_info)[i].i_eat < list_info[0]->global_info->n_eat))
+		(((*list_info)[i].i_eat < list_info[0]->global_info->n_eat) || \
+			list_info[0]->global_info->n_eat == -1))
 	{
 		say_stop(&(*list_info)[i]);
 		print_dead(&(*list_info)[i]);
@@ -54,13 +55,16 @@ int	check_end_eat(t_info **list_info)
 
 	i = 0;
 	e = 0;
-	while (i < (*list_info)[0].global_info->total_philo)
+	if ((*list_info)[0].global_info->total_philo != 1)
 	{
-		if ((*list_info)[i].i_eat == list_info[0]->global_info->n_eat)
-			e++;
-		i++;
+		while (i < (*list_info)[0].global_info->total_philo)
+		{
+			if ((*list_info)[i].i_eat == list_info[0]->global_info->n_eat)
+				e++;
+			i++;
+		}
+		if (e == (*list_info)[0].global_info->total_philo - 1)
+			return (1);
 	}
-	if (e == (*list_info)[0].global_info->total_philo - 1)
-		return (1);
 	return (0);
 }

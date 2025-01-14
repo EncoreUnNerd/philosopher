@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:17:31 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 18:42:03 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 15:22:56 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,19 @@ int	thinking(t_info *info, int e)
 	else
 	{
 		print_thinking(info);
-		if (info->global_info->time_eat > info->global_info->time_sleep)
-			my_usleep(((info->global_info->time_eat * 1.2) - \
-						info->global_info->time_sleep) * 1000);
-		else
-			my_usleep((info->global_info->time_eat * 1.2) * 1000);
+		thinking2(info);
 	}
 	return (1);
+}
+
+void	thinking2(t_info *info)
+{
+	if (info->global_info->time_eat > info->global_info->time_sleep \
+		&& info->global_info->total_philo % 2 != 0)
+		my_usleep(((info->global_info->time_eat * 1.2) - \
+					info->global_info->time_sleep) * 1000);
+	else if (info->global_info->total_philo % 2 != 0)
+		my_usleep((info->global_info->time_eat * 1.2) * 1000);
 }
 
 void	eating(t_info *info)

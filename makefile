@@ -1,6 +1,6 @@
 NAME = philosopher
 
-SRCS = main.c actions.c check.c initialize.c prints.c threads.c utils.c monitoring_utils.c main_utils.c
+SRCS = main.c actions.c check.c initialize.c prints.c threads.c utils.c monitoring_utils.c main_utils.c errors.c
 # SRCS_UTILITIES = stack_utilities/advanced_stack_operations.c \
 # 				stack_utilities/stack_initialization.c \
 # 				stack_utilities/stack_management.c \
@@ -13,7 +13,7 @@ OBJS = $(SRCS:.c=.o)
 # OBJS_UTILITIES = $(SRCS_UTILITIES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address -pthread
 
 GREEN = \033[32m
 BLUE = \033[34m

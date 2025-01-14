@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 14:24:11 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/14 16:16:46 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ void	*monitoring(void *infos)
 		while (i < list_info[0].global_info->total_philo)
 		{
 			run = check_and_update(&list_info, get_timestamp(0), i);
+			if (check_end_eat(&list_info) == 1)
+				run = 0;
 			if (run == 0)
 				break ;
-			if (check_end_eat(&list_info) == 1)
-			{
-				run = 0;
-				break ;
-			}
 			i++;
 		}
 		i = 0;
@@ -45,10 +42,11 @@ void	*philo(void *data)
 	t_info	*info;
 
 	info = (t_info *)data;
+	solo(info);
 	if (info->number % 2 != 0)
 		thinking(info, 0);
-	while (is_stoped(info) == 0 && (info->i_eat < info->global_info->n_eat \
-			|| info->global_info->n_eat == -1))
+	while (is_stoped(info) == 0 && (info->i_eat < info->global_info->n_eat || \
+		info->global_info->n_eat == -1) && info->fork_left != info->fork_right)
 	{
 		if (is_stoped(info) == 0)
 		{
@@ -66,4 +64,13 @@ void	*philo(void *data)
 		}
 	}
 	return (NULL);
+}
+
+void	solo(t_info *info)
+{
+	if (info->fork_left == info->fork_right)
+	{
+		print_fork(info);
+		my_usleep(info->global_info->time_die * 1000);
+	}
 }
