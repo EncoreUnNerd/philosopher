@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:32:18 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 14:49:18 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:08:13 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	get_last_meal(t_info *info)
 {
 	size_t	last_eat;	
 
-	usleep(100);
+	usleep(VALOPTI);
 	pthread_mutex_lock(&info->read_l);
 	last_eat = info->last_meal;
 	pthread_mutex_unlock(&info->read_l);
@@ -25,7 +25,7 @@ size_t	get_last_meal(t_info *info)
 
 void	say_stop(t_info	*info)
 {
-	usleep(100);
+	usleep(VALOPTI);
 	pthread_mutex_lock(&info->global_info->read_s);
 	info->global_info->stop = 1;
 	pthread_mutex_unlock(&info->global_info->read_s);

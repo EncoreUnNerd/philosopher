@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:17:31 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 14:53:57 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:08:03 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	sleepneat(t_info *info)
 {
 	if (is_stoped(info) == 0)
 	{
-		usleep(100);
+		usleep(VALOPTI);
 		if (info->number % 2 != 0)
 			pthread_mutex_lock(info->fork_right);
 		else

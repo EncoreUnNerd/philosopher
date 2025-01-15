@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 14:54:17 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:07:57 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*philo(void *data)
 	{
 		if (is_stoped(info) == 0)
 		{
-			usleep(100);
+			usleep(VALOPTI);
 			if (info->number % 2 != 0)
 				pthread_mutex_lock(info->fork_left);
 			else

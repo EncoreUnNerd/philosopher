@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:18:50 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 14:54:05 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:08:32 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_thinking(t_info *info)
 {
-	usleep(100);
+	usleep(VALOPTI);
 	pthread_mutex_lock(&info->global_info->print);
 	if (is_stoped(info) == 0)
 		printf("%lu %zu is thinking\n", \
@@ -24,7 +24,7 @@ void	print_thinking(t_info *info)
 
 void	print_eating(t_info *info)
 {
-	usleep(100);
+	usleep(VALOPTI);
 	pthread_mutex_lock(&info->global_info->print);
 	if (is_stoped(info) == 0)
 		printf("%lu %zu is eating\n", \
@@ -34,7 +34,7 @@ void	print_eating(t_info *info)
 
 void	print_sleeping(t_info *info)
 {
-	usleep(100);
+	usleep(VALOPTI);
 	pthread_mutex_lock(&info->global_info->print);
 	if (is_stoped(info) == 0)
 		printf("%lu %zu is sleeping\n", \
@@ -44,7 +44,7 @@ void	print_sleeping(t_info *info)
 
 void	print_fork(t_info *info)
 {
-	usleep(100);
+	usleep(VALOPTI);
 	pthread_mutex_lock(&info->global_info->print);
 	if (is_stoped(info) == 0)
 		printf("%lu %zu has taken a fork\n", \
@@ -54,7 +54,7 @@ void	print_fork(t_info *info)
 
 void	print_dead(t_info *info)
 {
-	usleep(100);
+	usleep(VALOPTI);
 	pthread_mutex_lock(&info->global_info->print);
 	printf("%zu %zu is dead\n", \
 	get_timestamp(info->global_info->start_time), info->number);
