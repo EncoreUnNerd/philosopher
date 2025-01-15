@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:34:20 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 19:32:20 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:49:05 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../header/philosopher.h"
 
 void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks)
 {

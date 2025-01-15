@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 19:24:15 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 15:06:18 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,39 +52,56 @@ typedef struct goofy_bin
 	t_global_info	global_info;
 }	t_bin;
 
-int		create_locks(pthread_mutex_t **lock_list, size_t number_of_philo);
-int		create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp);
-size_t	get_timestamp(size_t start_time);
-int		thinking(t_info *info, int e);
-int		my_usleep(size_t usec);
-int		create_global_info(t_global_info *g, size_t td, size_t te, size_t ts);
-int		ft_atoi(const char *str);
-int		check_args_validity(int number, char **value);
+// THREADS
+void	*monitoring(void *infos);
 void	*philo(void *data);
+void	solo(t_info *info);
+
+// ACTIONS
+int		sleepneat(t_info *info);
+int		thinking(t_info *info, int e);
+void	thinking2(t_info *info);
 void	eating(t_info *info);
 void	sleeping(t_info *info);
-int		is_stoped(t_info *info);
+
+// CHECK
+int		check_args_validity(int number, char **value);
+
+// ERORRS
+void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
+void	free_all(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
+void	destroy_locks(pthread_mutex_t **locks, int max);
+void	destroy_infos(t_info **l_i, int max);
+void	free_opti(int i, t_bin *bin, char **av);
+
+// INITIALIZE
+int		create_locks(pthread_mutex_t **lock_list, size_t number_of_philo);
+int		create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp);
+int		create_global_info(t_global_info *g, size_t td, size_t te, size_t ts);
+
+// MAIN_UTILS
+void	monitor_n_wait(char **av, t_bin *bin, int i);
+int		initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i);
+void	mall_init(t_bin *bin, char **av);
+int		optization(int i, char **av, t_bin *bin);
+
+// MONITORING_UTILS
+size_t	get_last_meal(t_info *info);
+void	say_stop(t_info	*info);
+int		check_and_update(t_info **list_info, size_t actual_time, int i);
+int		check_end_eat(t_info **list_info);
+
+// PRINTS
 void	print_fork(t_info *info);
 void	print_sleeping(t_info *info);
 void	print_eating(t_info *info);
 void	print_thinking(t_info *info);
 void	print_dead(t_info *info);
-void	*monitoring(void *infos);
-size_t	get_last_meal(t_info *info);
-void	say_stop(t_info	*info);
-int		check_and_update(t_info **list_info, size_t actual_time, int i);
-void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
-int		sleepneat(t_info *info);
-void	monitor_n_wait(char **av, t_bin *bin, int i);
-int		initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i);
-int		check_end_eat(t_info **list_info);
-void	thinking2(t_info *info);
-void	solo(t_info *info);
-void	mall_init(t_bin *bin, char **av);
-void	destroy_locks(pthread_mutex_t **locks, int max);
-void	free_all(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
-void	destroy_infos(t_info **l_i, int max);
-void	free_opti(int i, t_bin *bin, char **av);
-int		optization(int i, char **av, t_bin *bin);
+
+// UTILS
+size_t	get_timestamp(size_t start_time);
+int		my_usleep(size_t usec);
+int		ft_atoi(const char *str);
+int		is_stoped(t_info *info);
 
 #endif

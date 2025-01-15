@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:44:45 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 18:46:41 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:49:30 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../header/philosopher.h"
 
 size_t	get_timestamp(size_t start_time)
 {

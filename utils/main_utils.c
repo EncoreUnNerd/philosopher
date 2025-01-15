@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:23:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 19:32:58 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:49:13 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../header/philosopher.h"
 
 void	monitor_n_wait(char **av, t_bin *bin, int i)
 {

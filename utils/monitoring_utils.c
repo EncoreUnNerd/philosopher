@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:32:18 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 19:19:20 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:49:18 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../header/philosopher.h"
 
 size_t	get_last_meal(t_info *info)
 {

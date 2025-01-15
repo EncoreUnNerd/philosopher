@@ -1,16 +1,17 @@
 NAME = philosopher
 
-SRCS = main.c actions.c check.c initialize.c prints.c threads.c utils.c monitoring_utils.c main_utils.c errors.c
-# SRCS_UTILITIES = stack_utilities/advanced_stack_operations.c \
-# 				stack_utilities/stack_initialization.c \
-# 				stack_utilities/stack_management.c \
-# 				stack_utilities/stack_operations_helper.c \
-# 				stack_utilities/stack_operations.c \
-# 				stack_utilities/stack_utilities.c \
-# 				stack_utilities/stack_push_operations.c
+SRCS = main.c threads.c
+SRCS_UTILITIES = utils/actions.c \
+					utils/check.c \
+					utils/errors.c \
+					utils/initialize.c \
+					utils/main_utils.c \
+					utils/monitoring_utils.c \
+					utils/prints.c \
+					utils/utils.c
 
 OBJS = $(SRCS:.c=.o)
-# OBJS_UTILITIES = $(SRCS_UTILITIES:.c=.o)
+OBJS_UTILITIES = $(SRCS_UTILITIES:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address -pthread
@@ -21,7 +22,7 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(OBJS_UTILITIES)
 	@printf "$(BLUE)[💭] $(NAME) compiling$(RESET)\n"
 	@$(CC) $(CFLAGS) -o $@ $^
 	@printf "$(GREEN)[✅] $(NAME) compiled$(RESET)\n"
@@ -29,6 +30,7 @@ $(NAME): $(OBJS)
 clean:
 	@printf "$(BLUE)[🧹] cleaning$(RESET)\n"
 	@rm -f $(OBJS)
+	@rm -f $(OBJS_UTILITIES)
 	@printf "$(GREEN)[✨] cleaned$(RESET)\n"
 
 fclean: clean

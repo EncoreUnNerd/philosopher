@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:17:31 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 15:22:56 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:53:57 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../header/philosopher.h"
 
 int	sleepneat(t_info *info)
 {

@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:02:09 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 19:32:51 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:54:23 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "header/philosopher.h"
 
 //? etre sur que les verifs marche bb love <3
 

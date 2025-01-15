@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 16:16:46 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:54:17 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "header/philosopher.h"
 
 void	*monitoring(void *infos)
 {

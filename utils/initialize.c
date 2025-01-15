@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:19:47 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/14 18:40:09 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:49:09 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../header/philosopher.h"
 
 int	create_locks(pthread_mutex_t **lock_list, size_t number_of_philo)
 {

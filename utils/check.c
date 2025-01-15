@@ -6,11 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:41:51 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/13 16:21:45 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/15 14:49:01 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "../header/philosopher.h"
 
 int	is_valid_number(const char *str)
 {
