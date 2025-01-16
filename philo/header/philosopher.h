@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 15:09:52 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/16 15:46:13 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/time.h>
 
 # ifndef VALOPTI
-# define VALOPTI 100
+#  define VALOPTI 100
 # endif
 
 typedef struct global_info

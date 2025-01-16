@@ -14,7 +14,7 @@ OBJS = $(SRCS:.c=.o)
 OBJS_UTILITIES = $(SRCS_UTILITIES:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address -pthread
+CFLAGS = -Wall -Wextra -Werror -g3
 
 GREEN = \033[32m
 BLUE = \033[34m
