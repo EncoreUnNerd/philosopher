@@ -1,4 +1,4 @@
-NAME = philosopher
+NAME = philo
 
 SRCS = main.c threads.c
 SRCS_UTILITIES = utils/actions.c \
