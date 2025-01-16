@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:19:47 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 14:49:09 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/16 16:46:52 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp)
 {
 	il[p].number = p;
 	il[p].i_eat = 0;
-	if (pthread_mutex_init(&il[p].read_l, NULL) != 0)
+	if (mutex_philo(il, p) == -1)
 		return (-1);
 	il[p].last_meal = il[p].global_info->start_time;
 	if (p != 0 && p != mp)
@@ -54,6 +54,18 @@ int	create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp)
 	return (0);
 }
 
+int	mutex_philo(t_info *il, size_t p)
+{
+	if (pthread_mutex_init(&il[p].read_l, NULL) != 0)
+		return (-1);
+	if (pthread_mutex_init(&il[p].read_nm, NULL) != 0)
+	{
+		pthread_mutex_destroy(&il[p].read_l);
+		return (-1);
+	}
+	return (0);
+}
+
 int	create_global_info(t_global_info *g, size_t td, size_t te, size_t ts)
 {
 	g->time_eat = te;
@@ -61,8 +73,14 @@ int	create_global_info(t_global_info *g, size_t td, size_t te, size_t ts)
 	g->time_die = td;
 	if (pthread_mutex_init(&g->read_s, NULL) != 0)
 		return (0);
+	if (pthread_mutex_init(&g->starting, NULL) != 0)
+	{
+		pthread_mutex_destroy(&g->read_s);
+		return (0);
+	}
 	if (pthread_mutex_init(&g->print, NULL) != 0)
 	{
+		pthread_mutex_destroy(&g->starting);
 		pthread_mutex_destroy(&g->read_s);
 		return (0);
 	}

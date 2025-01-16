@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:23:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 14:49:13 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/16 16:20:10 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	mall_init(t_bin *bin, char **av)
 
 int	optization(int i, char **av, t_bin *bin)
 {
+	pthread_mutex_lock(&bin->global_info.starting);
 	while (i < ft_atoi(av[1]))
 	{
 		bin->list_infos[i].global_info = &bin->global_info;
@@ -84,5 +85,6 @@ int	optization(int i, char **av, t_bin *bin)
 		pthread_create(&bin->list_threads[i], NULL, philo, &bin->list_infos[i]);
 		i++;
 	}
+	pthread_mutex_unlock(&bin->global_info.starting);
 	return (i);
 }

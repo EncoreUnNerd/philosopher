@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/16 15:46:13 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/16 16:46:25 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct global_info
 	size_t			total_philo;
 	int				n_eat;
 	int				stop;
+	pthread_mutex_t	starting;
 	pthread_mutex_t	read_s;
 	pthread_mutex_t	print;
 }	t_global_info;
@@ -44,6 +45,7 @@ typedef struct info
 	int				i_eat;
 	t_global_info	*global_info;
 	pthread_mutex_t	read_l;
+	pthread_mutex_t	read_nm;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
 }	t_info;
@@ -82,6 +84,7 @@ void	free_opti(int i, t_bin *bin, char **av);
 int		create_locks(pthread_mutex_t **lock_list, size_t number_of_philo);
 int		create_infos(t_info	*il, size_t p, pthread_mutex_t *ll, size_t mp);
 int		create_global_info(t_global_info *g, size_t td, size_t te, size_t ts);
+int		mutex_philo(t_info *il, size_t p);
 
 // MAIN_UTILS
 void	monitor_n_wait(char **av, t_bin *bin, int i);

@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 15:07:57 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/16 16:38:47 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	*philo(void *data)
 
 void	solo(t_info *info)
 {
+	pthread_mutex_lock(&info->global_info->starting);
+	pthread_mutex_unlock(&info->global_info->starting);
 	if (info->fork_left == info->fork_right)
 	{
 		print_fork(info);

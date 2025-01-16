@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:17:31 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 15:08:03 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/16 16:35:48 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	sleeping(t_info *info)
 	{
 		print_sleeping(info);
 		my_usleep(info->global_info->time_sleep * 1000);
+		pthread_mutex_lock(&info->read_nm);
 		info->i_eat++;
+		pthread_mutex_unlock(&info->read_nm);
 	}
 }

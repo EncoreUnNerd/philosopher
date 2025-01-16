@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:32:18 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 15:08:13 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/16 16:36:07 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ int	check_end_eat(t_info **list_info)
 	{
 		while (i < (*list_info)[0].global_info->total_philo)
 		{
+			pthread_mutex_lock(&(*list_info)[i].read_nm);
 			if ((*list_info)[i].i_eat == list_info[0]->global_info->n_eat)
 				e++;
+			pthread_mutex_unlock(&(*list_info)[i].read_nm);
 			i++;
 		}
 		if (e == (*list_info)[0].global_info->total_philo - 1)
