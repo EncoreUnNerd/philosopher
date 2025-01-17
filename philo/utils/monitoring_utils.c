@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:32:18 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/16 16:36:07 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:11:39 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_end_eat(t_info **list_info)
 			pthread_mutex_unlock(&(*list_info)[i].read_nm);
 			i++;
 		}
-		if (e == (*list_info)[0].global_info->total_philo - 1)
+		if (e == (*list_info)[0].global_info->total_philo)
 			return (1);
 	}
 	return (0);

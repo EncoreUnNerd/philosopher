@@ -6,13 +6,11 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:02:09 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/17 16:20:09 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:06:36 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/philosopher.h"
-
-//? etre sur que les verifs marche bb love <3
 
 int	main(int ac, char **av)
 {
