@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:02:09 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/17 17:32:53 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 18:02:10 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	int		i;
 	t_bin	bin;
 
-	if (check_args_validity(ac, av) == 0 || !(ac == 5 || ac == 6))
+	if (!(ac == 5 || ac == 6) || check_args_validity(ac, av) == 0)
 		return (-1);
 	if (ac == 5)
 		bin.global_info.n_eat = -1;
