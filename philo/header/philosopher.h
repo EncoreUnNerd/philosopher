@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/16 16:46:25 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 16:20:00 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	sleeping(t_info *info);
 int		check_args_validity(int number, char **value);
 
 // ERORRS
-void	free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
-void	free_all(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
+int		free_everything(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
+int		free_all(pthread_t **l_t, t_info **l_i, pthread_mutex_t **locks);
 void	destroy_locks(pthread_mutex_t **locks, int max);
 void	destroy_infos(t_info **l_i, int max);
-void	free_opti(int i, t_bin *bin, char **av);
+int		free_opti(int i, t_bin *bin, char **av);
 
 // INITIALIZE
 int		create_locks(pthread_mutex_t **lock_list, size_t number_of_philo);
@@ -89,7 +89,7 @@ int		mutex_philo(t_info *il, size_t p);
 // MAIN_UTILS
 void	monitor_n_wait(char **av, t_bin *bin, int i);
 int		initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i);
-void	mall_init(t_bin *bin, char **av);
+int		mall_init(t_bin *bin, char **av);
 int		optization(int i, char **av, t_bin *bin);
 
 // MONITORING_UTILS
@@ -110,5 +110,7 @@ size_t	get_timestamp(size_t start_time);
 int		my_usleep(size_t usec);
 int		ft_atoi(const char *str);
 int		is_stoped(t_info *info);
+
+int		check_if_enough(int i, char **av, t_bin *bin);
 
 #endif

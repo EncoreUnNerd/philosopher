@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:23:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/16 16:20:10 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 16:15:54 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ int	initialize(char **av, pthread_mutex_t **locks, t_global_info *g_i)
 	return (0);
 }
 
-void	mall_init(t_bin *bin, char **av)
+int	mall_init(t_bin *bin, char **av)
 {
 	bin->locks = malloc(sizeof(pthread_mutex_t) * ft_atoi(av[1]));
 	if (!bin->locks)
 	{
 		printf("Error malloc\n");
-		exit(-1);
+		return (-1);
 	}
 	bin->list_threads = malloc((ft_atoi(av[1]) + 1) * sizeof(pthread_t));
 	if (!bin->list_threads)
 	{
 		printf("Error malloc\n");
 		free(bin->locks);
-		exit(-1);
+		return (-1);
 	}
 	bin->list_infos = malloc(ft_atoi(av[1]) * sizeof(t_info));
 	if (!bin->list_infos)
@@ -69,8 +69,9 @@ void	mall_init(t_bin *bin, char **av)
 		printf("Error malloc\n");
 		free(bin->locks);
 		free(bin->list_threads);
-		exit(-1);
+		return (-1);
 	}
+	return (0);
 }
 
 int	optization(int i, char **av, t_bin *bin)
