@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/16 16:38:47 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:51:49 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,7 @@ void	*philo(void *data)
 			else
 				pthread_mutex_lock(info->fork_right);
 			print_fork(info);
-			while (is_stoped(info) == 0)
-			{
-				if (sleepneat(info) == 1)
-					break ;
-			}
+			loop_second_fork(info);
 		}
 	}
 	return (NULL);
@@ -74,5 +70,24 @@ void	solo(t_info *info)
 	{
 		print_fork(info);
 		my_usleep(info->global_info->time_die * 1000);
+	}
+}
+
+void	loop_second_fork(t_info *info)
+{
+	int	verif;
+
+	while (is_stoped(info) == 0)
+	{
+		verif = sleepneat(info);
+		if (verif == 1)
+			break ;
+	}
+	if (is_stoped(info) != 0 && verif != 1)
+	{
+		if (info->number % 2 != 0)
+			pthread_mutex_unlock(info->fork_left);
+		else
+			pthread_mutex_unlock(info->fork_right);
 	}
 }

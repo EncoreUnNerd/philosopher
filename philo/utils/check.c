@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:41:51 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/15 14:49:01 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:56:23 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ int	check_args_validity(int number, char **value)
 	int	i;
 
 	i = 1;
+	if (ft_atoi(value[1]) <= 0)
+		return (0);
+	if (number == 6 && ft_atoi(value[5]) <= 0)
+		return (0);
 	while (i <= number - 1)
 	{
 		if (verif_atoi(value[i]) == 0)

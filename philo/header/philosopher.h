@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/17 16:20:00 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:51:13 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct goofy_bin
 void	*monitoring(void *infos);
 void	*philo(void *data);
 void	solo(t_info *info);
+void	loop_second_fork(t_info *info);
 
 // ACTIONS
 int		sleepneat(t_info *info);
