@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:18:46 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/17 17:51:13 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:08:46 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #  define VALOPTI 100
 # endif
 
-typedef struct global_info
+typedef struct s_global_info
 {
 	size_t			time_eat;
 	size_t			time_sleep;
@@ -38,7 +38,7 @@ typedef struct global_info
 	pthread_mutex_t	print;
 }	t_global_info;
 
-typedef struct info
+typedef struct s_info
 {
 	size_t			number;
 	size_t			last_meal;
@@ -50,7 +50,7 @@ typedef struct info
 	pthread_mutex_t	*fork_right;
 }	t_info;
 
-typedef struct goofy_bin
+typedef struct s_goofy_bin
 {
 	pthread_mutex_t	*locks;
 	pthread_t		*list_threads;

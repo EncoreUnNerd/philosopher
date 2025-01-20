@@ -6,7 +6,7 @@
 /*   By: mhenin <mhenin@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:15:53 by mhenin            #+#    #+#             */
-/*   Updated: 2025/01/17 17:51:49 by mhenin           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:02:44 by mhenin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	loop_second_fork(t_info *info)
 {
 	int	verif;
 
+	verif = 0;
 	while (is_stoped(info) == 0)
 	{
 		verif = sleepneat(info);
